@@ -3,26 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/ListTodoFragment">
+
+    <action
+        android:id="@+id/action_global_DetailTodoFragment"
+        app:destination="@id/DetailTodoFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/ListTodoFragment"
         android:name="com.samuelnunes.too_dooapp.presentation.todo_list.ListTodoFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_list_todo">
-
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.samuelnunes.too_dooapp.presentation.todo_detail.TodoDetailsFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_todo_details">
 
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+    <fragment
+        android:id="@+id/DetailTodoFragment"
+        android:name="com.samuelnunes.too_dooapp.presentation.todo_detail.TodoDetailsFragment"
+        android:label="{screenState}"
+        tools:layout="@layout/fragment_todo_details">
+        <argument
+            android:name="screenState"
+            app:argType="com.samuelnunes.too_dooapp.presentation.ScreenState" />
+        <argument
+            android:name="todoId"
+            android:defaultValue="-1"
+            app:argType="integer" />
     </fragment>
 </navigation>

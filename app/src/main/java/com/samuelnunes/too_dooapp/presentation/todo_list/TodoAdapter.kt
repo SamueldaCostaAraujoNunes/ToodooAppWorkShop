@@ -1,5 +1,6 @@
 package com.samuelnunes.too_dooapp.presentation.todo_list
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.Paint
 import android.view.LayoutInflater
@@ -10,11 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.samuelnunes.too_dooapp.databinding.ItemTodoBinding
 import com.samuelnunes.too_dooapp.domain.model.Todo
 
-class TodoAdapter: RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
+class TodoAdapter(private val onItemClicked: (Todo) -> Unit): RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
 
     inner class TodoViewHolder(private val binding: ItemTodoBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(todo: Todo){
             binding.apply {
+                root.setOnClickListener{ onItemClicked(todo) }
                 bar.setBackgroundColor(Color.parseColor(todo.priority.color))
                 tvTitle.text = todo.title
                 tvTitle.fineshed(todo)
@@ -36,6 +38,7 @@ class TodoAdapter: RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
 
     private var _todos: List<Todo> = listOf()
     var todos: List<Todo>
+        @SuppressLint("NotifyDataSetChanged")
         set(value) {
             _todos = value
             notifyDataSetChanged()

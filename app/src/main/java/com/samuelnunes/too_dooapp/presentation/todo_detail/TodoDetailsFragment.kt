@@ -5,11 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.samuelnunes.too_dooapp.R
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.navArgs
 import com.samuelnunes.too_dooapp.databinding.FragmentTodoDetailsBinding
+import com.samuelnunes.too_dooapp.presentation.MainViewModel
+
 
 class TodoDetailsFragment : Fragment() {
+
+    private val args: TodoDetailsFragmentArgs by navArgs()
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     private lateinit var binding: FragmentTodoDetailsBinding
 
@@ -19,5 +24,10 @@ class TodoDetailsFragment : Fragment() {
     ): View {
         binding = FragmentTodoDetailsBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mainViewModel.setState(args.screenState)
     }
 }

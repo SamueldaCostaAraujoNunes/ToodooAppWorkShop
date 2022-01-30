@@ -14,6 +14,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.snackbar.Snackbar
 import com.samuelnunes.too_dooapp.R
 import com.samuelnunes.too_dooapp.databinding.ActivityMainBinding
+import com.samuelnunes.too_dooapp.presentation.todo_list.ListTodoFragmentDirections
 import kotlinx.coroutines.flow.collect
 import timber.log.Timber
 
@@ -46,10 +47,11 @@ import timber.log.Timber
             binding.fab.setImageResource(it.icon)
         }
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-            mainViewModel.setStateSave()
+        binding.fab.setOnClickListener {
+            val direction =
+                ListTodoFragmentDirections.actionGlobalDetailTodoFragment(ScreenState.SAVE)
+            navController.navigate(direction)
+            mainViewModel.setState(ScreenState.SAVE)
         }
     }
 

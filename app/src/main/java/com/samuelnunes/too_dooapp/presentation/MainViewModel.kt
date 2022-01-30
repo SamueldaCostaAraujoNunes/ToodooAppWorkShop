@@ -1,5 +1,6 @@
 package com.samuelnunes.too_dooapp.presentation
 
+import android.service.autofill.CustomDescription
 import androidx.annotation.DrawableRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -22,12 +23,14 @@ class MainViewModel : ViewModel() {
 
     fun hideLoading() = _loading.update { false }
 
-    fun setStateAdd() = _screenState.postValue(ScreenState.ADD)
-    fun setStateEdit() = _screenState.postValue(ScreenState.EDIT)
-    fun setStateSave() = _screenState.postValue(ScreenState.SAVE)
+    fun setState(screenState: ScreenState) = _screenState.postValue(screenState)
 
 }
 
-enum class ScreenState(@DrawableRes val icon: Int) {
-    ADD(R.drawable.ic_add), EDIT(R.drawable.ic_edit), SAVE(R.drawable.ic_save)
+enum class ScreenState(@DrawableRes val icon: Int, private val description: String) {
+    ADD(R.drawable.ic_add, "Insira uma Nota"),
+    EDIT(R.drawable.ic_edit, "Edite esta Nota"),
+    SAVE(R.drawable.ic_save, "Salve esta Nota");
+
+    override fun toString(): String = description
 }
