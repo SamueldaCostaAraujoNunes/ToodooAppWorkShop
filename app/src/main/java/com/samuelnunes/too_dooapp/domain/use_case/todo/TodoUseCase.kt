@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.map
 
 class TodoUseCase(private val repository: ITodoRepository) : ITodoUseCase {
     override fun getAllTodos(): Flow<Resource<List<Todo>>> {
-        return repository.getAllTodos().map { res ->
+        return repository.getAllTodosDto().map { res ->
             res.convertType { todos ->
                 todos.map {
                     it.toTodo()
@@ -20,7 +20,7 @@ class TodoUseCase(private val repository: ITodoRepository) : ITodoUseCase {
     }
 
     override fun getTodo(id: Int): Flow<Resource<Todo>> {
-        return repository.getTodo(id).map { res ->
+        return repository.getTodoDto(id).map { res ->
             res.convertType {
                 it.toTodo()
             }
@@ -28,7 +28,7 @@ class TodoUseCase(private val repository: ITodoRepository) : ITodoUseCase {
     }
 
     override fun postTodo(todo: Todo): Flow<Resource<Todo>> {
-        return repository.postTodo(TodoDto.byTodo(todo)).map { res ->
+        return repository.postTodoDto(TodoDto.byTodo(todo)).map { res ->
             res.convertType {
                 it.toTodo()
             }

@@ -8,10 +8,10 @@ import kotlinx.coroutines.flow.Flow
 
 class TodoRepository(private val api: TodoApi) : BaseRepository, ITodoRepository {
 
-    override fun getAllTodos(): Flow<Resource<List<TodoDto>>> = tryRequest{ api.getTodos() }
+    override fun getAllTodosDto(): Flow<Resource<List<TodoDto>>> = tryRequest{ api.getTodos() }
 
-    override fun getTodo(id: Int): Flow<Resource<TodoDto>> = tryRequest{ api.getTodo(id) }
+    override fun getTodoDto(id: Int): Flow<Resource<TodoDto>> = tryRequest{ api.getTodo(id) }
 
-    override fun postTodo(todo: TodoDto): Flow<Resource<TodoDto>> = tryRequest{ api.postTodo(todo) }
+    override fun postTodoDto(todo: TodoDto): Flow<Resource<TodoDto>> = tryRequest{ api.postTodo(todo) }
 
 }

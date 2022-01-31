@@ -23,11 +23,8 @@
     <fragment
         android:id="@+id/DetailTodoFragment"
         android:name="com.samuelnunes.too_dooapp.presentation.todo_detail.TodoDetailsFragment"
-        android:label="{screenState}"
+        android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_todo_details">
-        <argument
-            android:name="screenState"
-            app:argType="com.samuelnunes.too_dooapp.presentation.ScreenState" />
         <argument
             android:name="todoId"
             android:defaultValue="-1"

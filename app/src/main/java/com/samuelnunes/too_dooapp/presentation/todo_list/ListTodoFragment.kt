@@ -40,7 +40,7 @@ class ListTodoFragment : Fragment() {
         binding = FragmentListTodoBinding.inflate(inflater, container, false).apply {  }
         todoAdapter = TodoAdapter {
             val direction =
-                ListTodoFragmentDirections.actionGlobalDetailTodoFragment(ScreenState.EDIT, it.id)
+                ListTodoFragmentDirections.actionGlobalDetailTodoFragment(it.id)
             navController.navigate(direction)
         }
         return binding.root.apply {

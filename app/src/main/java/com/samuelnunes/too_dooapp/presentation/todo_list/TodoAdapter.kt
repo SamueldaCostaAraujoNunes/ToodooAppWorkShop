@@ -1,13 +1,12 @@
 package com.samuelnunes.too_dooapp.presentation.todo_list
 
 import android.annotation.SuppressLint
-import android.graphics.Color
-import android.graphics.Paint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.samuelnunes.too_dooapp.common.extensions.backgroundByPriority
+import com.samuelnunes.too_dooapp.common.extensions.fineshed
+import com.samuelnunes.too_dooapp.common.extensions.visibilityIf
 import com.samuelnunes.too_dooapp.databinding.ItemTodoBinding
 import com.samuelnunes.too_dooapp.domain.model.Todo
 
@@ -17,22 +16,13 @@ class TodoAdapter(private val onItemClicked: (Todo) -> Unit): RecyclerView.Adapt
         fun bind(todo: Todo){
             binding.apply {
                 root.setOnClickListener{ onItemClicked(todo) }
-                bar.setBackgroundColor(Color.parseColor(todo.priority.color))
+                bar.backgroundByPriority(todo.priority)
                 tvTitle.text = todo.title
-                tvTitle.fineshed(todo)
+                tvTitle.fineshed(todo.finished)
                 tvContent.text = todo.content
-                tvContent.fineshed(todo)
-                tvContent.visibility = if (todo.content.isNotEmpty()) View.VISIBLE else View.GONE
+                tvContent.fineshed(todo.finished)
+                tvContent.visibilityIf(todo.content.isNotEmpty())
             }
-        }
-
-        private fun TextView.fineshed(todo: Todo) {
-            paintFlags =
-                if (todo.finished) {
-                    paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-                } else {
-                    paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
-                }
         }
     }
 

@@ -7,12 +7,14 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.snackbar.Snackbar
 import com.samuelnunes.too_dooapp.R
+import com.samuelnunes.too_dooapp.common.extensions.visibilityIf
 import com.samuelnunes.too_dooapp.databinding.ActivityMainBinding
 import com.samuelnunes.too_dooapp.presentation.todo_list.ListTodoFragmentDirections
 import kotlinx.coroutines.flow.collect
@@ -30,32 +32,39 @@ import timber.log.Timber
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
-
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
-        lifecycleScope.launchWhenStarted {
-            mainViewModel.loading.collect {
-                binding.progressCircular.visibility = if (it) VISIBLE else GONE
-            }
-        }
-
-        mainViewModel.screenState.observe(this){
-            Timber.d("Atualizar fab: $it")
-            binding.fab.setImageResource(it.icon)
-        }
-
-        binding.fab.setOnClickListener {
-            val direction =
-                ListTodoFragmentDirections.actionGlobalDetailTodoFragment(ScreenState.SAVE)
-            navController.navigate(direction)
-            mainViewModel.setState(ScreenState.SAVE)
-        }
+        val navController = navigationSetup()
+        setupListeners(navController)
     }
 
-    override fun onSupportNavigateUp(): Boolean {
+        private fun setupListeners(navController: NavController) {
+            binding.apply {
+                lifecycleScope.launchWhenStarted {
+                    mainViewModel.loading.collect {
+                        progressCircular.visibilityIf(it)
+                    }
+                }
+
+                mainViewModel.screenState.observe(this@MainActivity) {
+                    fab.setImageResource(it.icon)
+                }
+
+                fab.setOnClickListener {
+                    val direction = ListTodoFragmentDirections.actionGlobalDetailTodoFragment()
+                    navController.navigate(direction)
+                }
+            }
+
+        }
+
+        private fun navigationSetup(): NavController {
+            setSupportActionBar(binding.toolbar)
+            val navController = findNavController(R.id.nav_host_fragment_content_main)
+            appBarConfiguration = AppBarConfiguration(navController.graph)
+            setupActionBarWithNavController(navController, appBarConfiguration)
+            return navController
+        }
+
+        override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()

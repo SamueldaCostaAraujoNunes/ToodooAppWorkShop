@@ -6,9 +6,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface ITodoRepository {
 
-    fun getAllTodos(): Flow<Resource<List<TodoDto>>>
+    fun getAllTodosDto(): Flow<Resource<List<TodoDto>>>
 
-    fun getTodo(id: Int): Flow<Resource<TodoDto>>
+    fun getTodoDto(id: Int): Flow<Resource<TodoDto>>
 
-    fun postTodo(todo: TodoDto): Flow<Resource<TodoDto>>
+    fun postTodoDto(todo: TodoDto): Flow<Resource<TodoDto>>
 }

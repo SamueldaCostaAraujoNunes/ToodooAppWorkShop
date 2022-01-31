@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.samuelnunes.too_dooapp.databinding.FragmentTodoDetailsBinding
 import com.samuelnunes.too_dooapp.presentation.MainViewModel
+import com.samuelnunes.too_dooapp.presentation.ScreenState
 
 
 class TodoDetailsFragment : Fragment() {
@@ -26,8 +27,8 @@ class TodoDetailsFragment : Fragment() {
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
-        mainViewModel.setState(args.screenState)
+    override fun onResume() {
+        super.onResume()
+        mainViewModel.setState(ScreenState.SAVE)
     }
 }

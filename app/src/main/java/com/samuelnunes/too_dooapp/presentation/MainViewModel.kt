@@ -1,12 +1,13 @@
 package com.samuelnunes.too_dooapp.presentation
 
-import android.service.autofill.CustomDescription
 import androidx.annotation.DrawableRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.samuelnunes.too_dooapp.R
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 
 class MainViewModel : ViewModel() {
 
@@ -29,7 +30,6 @@ class MainViewModel : ViewModel() {
 
 enum class ScreenState(@DrawableRes val icon: Int, private val description: String) {
     ADD(R.drawable.ic_add, "Insira uma Nota"),
-    EDIT(R.drawable.ic_edit, "Edite esta Nota"),
     SAVE(R.drawable.ic_save, "Salve esta Nota");
 
     override fun toString(): String = description
