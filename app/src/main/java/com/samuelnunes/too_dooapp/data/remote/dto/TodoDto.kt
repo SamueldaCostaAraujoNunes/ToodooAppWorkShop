@@ -1,7 +1,8 @@
 package com.samuelnunes.too_dooapp.data.remote.dto
 
 import com.samuelnunes.too_dooapp.domain.model.Todo
-import java.util.Date
+import java.time.LocalDateTime
+import java.util.*
 
 class TodoDto(
     var title: String,
@@ -9,7 +10,7 @@ class TodoDto(
     var priority: String = "LOW",
     var content: String = "",
     var finished: Boolean = false,
-    val created_at: Date = Date(),
+    val created_at: LocalDateTime = LocalDateTime.now(),
     val id: Int = -1
 ){
     companion object {

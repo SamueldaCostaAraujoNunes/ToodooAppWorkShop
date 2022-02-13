@@ -11,4 +11,6 @@ interface ITodoUseCase {
     fun getTodo(id: Int): Flow<Resource<Todo>>
 
     fun postTodo(todo: Todo): Flow<Resource<Todo>>
+
+    fun patchTodo(todo: Todo): Flow<Resource<Todo>>
 }

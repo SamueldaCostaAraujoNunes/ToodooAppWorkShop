@@ -44,13 +44,12 @@ import timber.log.Timber
                     }
                 }
 
-                mainViewModel.screenState.observe(this@MainActivity) {
-                    fab.setImageResource(it.icon)
+                mainViewModel.fabClickListener.observe(this@MainActivity) {
+                    fab.setOnClickListener(it)
                 }
 
-                fab.setOnClickListener {
-                    val direction = ListTodoFragmentDirections.actionGlobalDetailTodoFragment()
-                    navController.navigate(direction)
+                mainViewModel.screenState.observe(this@MainActivity) {
+                    fab.setImageResource(it.icon)
                 }
             }
 

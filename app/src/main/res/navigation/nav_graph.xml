@@ -26,8 +26,13 @@
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_todo_details">
         <argument
+            android:name="screenState"
+            android:defaultValue="ADD"
+            app:argType="com.samuelnunes.too_dooapp.presentation.ScreenState" />
+
+        <argument
             android:name="todoId"
             android:defaultValue="-1"
             app:argType="integer" />
-    </fragment>
+        </fragment>
 </navigation>
