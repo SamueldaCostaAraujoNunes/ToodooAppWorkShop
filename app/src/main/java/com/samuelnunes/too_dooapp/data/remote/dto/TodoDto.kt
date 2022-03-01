@@ -2,9 +2,8 @@ package com.samuelnunes.too_dooapp.data.remote.dto
 
 import com.samuelnunes.too_dooapp.domain.model.Todo
 import java.time.LocalDateTime
-import java.util.*
 
-class TodoDto(
+data class TodoDto(
     var title: String,
     var plataformOrigin: String,
     var priority: String = "LOW",

@@ -12,6 +12,7 @@
 
         <EditText
             android:id="@+id/et_title"
+            android:hint="Titulo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="20dp"
@@ -25,6 +26,7 @@
 
         <EditText
             android:id="@+id/et_content"
+            android:hint="Descreva aqui sua tarefa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"
@@ -46,6 +48,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_content"/>
 
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switch_finalizado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rg_priority"
+            android:text="Finalizado"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

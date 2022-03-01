@@ -11,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
 import com.samuelnunes.too_dooapp.common.Resource
+import com.samuelnunes.too_dooapp.common.extensions.backgroundByPriority
 import com.samuelnunes.too_dooapp.data.local.AppDatabase
 import com.samuelnunes.too_dooapp.data.local.AppDatabaseFactory
 import com.samuelnunes.too_dooapp.data.remote.TodoApi
@@ -55,6 +56,7 @@ class TodoDetailsFragment : Fragment() {
             text = priorityEnum.name
             isClickable = true
             isCheckable = true
+            backgroundByPriority(priorityEnum)
         }
 
     override fun onStart() {
@@ -162,14 +164,16 @@ class TodoDetailsFragment : Fragment() {
             etTitle.setText(todo.title)
             etContent.setText(todo.content)
             rgPriority.check(todo.priority.ordinal)
+            switchFinalizado.isChecked = todo.finished
         }
     }
 
     private fun todo(): Todo {
-        return lastTodo.apply {
+        return lastTodo.copy().apply {
             title = binding.etContent.text.toString()
             priority = Todo.PriorityEnum.valueOfByOrdinal(binding.rgPriority.checkedChipId) ?: Todo.PriorityEnum.LOW
             content = binding.etContent.text.toString()
+            finished = binding.switchFinalizado.isChecked
         }
     }
 
